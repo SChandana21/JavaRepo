@@ -26,7 +26,7 @@ import java.util.Optional;
         User userinDB = UserService.GetUserbyusername(Username);
         System.out.println(userinDB);
         JournalEntity Journal = JournalEntryrepo.save(JournalEntry);
-        userinDB.getJournalentries().add(Journal);
+        userinDB.getJournalentries().add(Journal);//try catch
         UserService.SaveUser(userinDB);
 
     }
@@ -39,8 +39,9 @@ import java.util.Optional;
         return JournalEntryrepo.findAll();
     }
 
-    public Optional<JournalEntity> GetByID (ObjectId id) {
-        return JournalEntryrepo.findById(id);
+    public List<JournalEntity> GetJournalofauser (String Username) {
+        User userfound = UserService.GetUserbyusername(Username);
+          return  userfound.getJournalentries();
     }
 
     public void DeleteEntry(ObjectId id, String Username) {
