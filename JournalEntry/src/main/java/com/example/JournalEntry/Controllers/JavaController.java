@@ -8,6 +8,8 @@
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
+    import org.springframework.security.core.Authentication;
+    import org.springframework.security.core.context.SecurityContextHolder;
     import org.springframework.transaction.annotation.Transactional;
     import org.springframework.web.bind.annotation.*;
 
@@ -28,17 +30,15 @@
 
 
             @GetMapping
-            public ResponseEntity<?> GetJournalEntriesofUser(@PathVariable String Username) {
-                User user = Userservice.GetUserbyusername(Username);
-                List <JournalEntity> L =  user.getJournalentries();
-                if (L != null && L.isEmpty()) {
-                    return new ResponseEntity<>(L, HttpStatus.FOUND);
+            public ResponseEntity<List<JournalEntity>> GetJournalEntriesofUser( ) {
+                List<JournalEntity> journalEntities = journalEntryService.GetJournalofauser();
+                if (journalEntities != null && !journalEntities.isEmpty()) {
+                    return ResponseEntity.ok(journalEntities);
                 }
-                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+                return ResponseEntity.noContent().build();
             }
             @Transactional
-            @PostMapping("/{Username}")
+            @PostMapping
         public ResponseEntity <JournalEntity> PostEntries(@RequestBody JournalEntity E, @PathVariable String Username) {
                 try {
                     journalEntryService.SaveEntry(E, Username);
