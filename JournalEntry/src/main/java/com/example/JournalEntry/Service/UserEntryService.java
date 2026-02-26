@@ -4,6 +4,8 @@ import com.example.JournalEntry.Entity.User;
 import com.example.JournalEntry.Repository.UserRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -31,9 +33,12 @@ public class UserEntryService {
         return Userrepo.save(Newuser);
     }
 
-    public boolean DeleteUser( ObjectId Id) {
-        Userrepo.deleteById(Id);
-        return true;
+    public boolean DeleteUser( ) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+        User user = Userrepo.findByUsername(name);
+        Userrepo.delete(user);
+        return  true;
     }
 
     public User GetUserbyusername(String username) {

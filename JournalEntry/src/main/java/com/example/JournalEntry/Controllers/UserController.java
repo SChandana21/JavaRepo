@@ -33,8 +33,8 @@ public class UserController {
 
 
     @DeleteMapping("{Id}")
-    public boolean DeleteUser(@PathVariable ObjectId Id) {
-        UserentryService.DeleteUser(Id);
+    public boolean DeleteUser() {
+        UserentryService.DeleteUser();
         return  true;
     }
 
