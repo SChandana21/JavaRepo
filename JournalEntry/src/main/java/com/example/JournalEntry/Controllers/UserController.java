@@ -6,9 +6,15 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,24 +22,14 @@ import java.util.Optional;
 @RequestMapping("/user")
 
 public class UserController {
+
+
+
     @Autowired
     private UserEntryService UserentryService;
 
-    @GetMapping
-    public List<User> GetAllUsers() {
-        return  UserentryService.GetallUser();
-    }
-    @Transactional
-    @PostMapping
-    public ResponseEntity<?> newUser(@RequestBody User newUser) {
-        try {
-            User savedUser = UserentryService.SaveUser(newUser);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error saving user: " + e.getMessage());
-        }
-    }
+
+
 
 
     @DeleteMapping("{Id}")
@@ -42,16 +38,7 @@ public class UserController {
         return  true;
     }
 
-    @PutMapping("/{username}")
-    public ResponseEntity<?> UpdateUser(@RequestBody User user, @PathVariable String username) {
-        User userinDB = UserentryService.GetUserbyusername(username);
-        if (userinDB != null) {
-            userinDB.setUsername(user.getUsername());
-            userinDB.setPassword(user.getPassword());
-            UserentryService.SaveUser(userinDB);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+
 
     @GetMapping("{username}")
     public User GetUserBYID(@PathVariable String username) {
@@ -59,6 +46,18 @@ public class UserController {
         User user = UserentryService.GetUserbyusername(username);
         System.out.println(user);
          return user;
+
+    }
+
+    @PutMapping
+    public ResponseEntity<?> Edituserdetails(@RequestBody User user) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User userinDB = UserentryService.GetUserbyusername(username);
+        userinDB.setUsername(user.getUsername());
+        userinDB.setPassword(user.getPassword());
+        UserentryService.SaveUser(userinDB);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 

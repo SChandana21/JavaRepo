@@ -50,10 +50,7 @@
             }
 
 
-            @GetMapping("id/{Username}")        //need to change from ID to username
-        public ResponseEntity<?> GetJournalEntrybyID (@PathVariable String Username) {
-               return journalEntryService.GetJournalofauser(Username);
-            }
+
 
             @DeleteMapping("id/{Username}/{myId}")
         public ResponseEntity<?> DeleteJournalEntry(@PathVariable String Username, @PathVariable ObjectId myId) {

@@ -4,23 +4,30 @@ import com.example.JournalEntry.Entity.User;
 import com.example.JournalEntry.Repository.UserRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+
 @Component
 public class UserEntryService {
+
+    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Autowired
     private UserRepo Userrepo;
 
-    public List<User> GetallUser() {
-        return Userrepo.findAll();
-    }
+    //
 
     public User SaveUser( User Newuser) {
+        Newuser.setPassword(passwordEncoder.encode(Newuser.getPassword()));
+        Newuser.setRoles(Arrays.asList("USER"));
         return Userrepo.save(Newuser);
     }
 
