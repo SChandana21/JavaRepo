@@ -30,7 +30,7 @@
 
 
             @GetMapping
-            public ResponseEntity<List<JournalEntity>> GetJournalEntriesofUser( ) {
+            public ResponseEntity<List<JournalEntity>> GetJournalEntriesofUser() {
                 List<JournalEntity> journalEntities = journalEntryService.GetJournalofauser();
                 if (journalEntities != null && !journalEntities.isEmpty()) {
                     return ResponseEntity.ok(journalEntities);
@@ -39,9 +39,9 @@
             }
             @Transactional
             @PostMapping
-        public ResponseEntity <JournalEntity> PostEntries(@RequestBody JournalEntity E, @PathVariable String Username) {
+        public ResponseEntity <JournalEntity> PostEntries(@RequestBody JournalEntity E) {
                 try {
-                    journalEntryService.SaveEntry(E, Username);
+                    journalEntryService.SaveEntry(E);
                     return new ResponseEntity<>(E, HttpStatus.CREATED);
                 } catch (Exception e) {
                     System.out.println(e);

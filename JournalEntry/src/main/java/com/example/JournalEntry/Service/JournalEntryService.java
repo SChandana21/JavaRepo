@@ -32,15 +32,25 @@ import java.util.Optional;
     }
 
     public void SaveEntry(JournalEntity Journal) {
-        JournalEntryrepo.save(Journal);
-    }
-
-    public List <JournalEntity> GetAll() {
-        return JournalEntryrepo.findAll();
-    }
-
-    public List<JournalEntity> GetJournalofauser ( ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+        JournalEntryrepo.save(Journal); //saved in journal_entries
+        User user = UserService.GetUserbyusername(name);
+        if (user == null) {
+            throw new RuntimeException("Authenticated user not found");
+        }
+        user.getJournalentries().add(Journal); //saved in users
+        UserService.updateUser(user);
+        //save in journal entries and also in User DB
+
+    }
+
+
+
+    public List<JournalEntity> GetJournalofauser () {
+        System.out.println("Reached");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("reached 2");
         String name = authentication.getName();
         User user = UserService.GetUserbyusername(name);
         List<JournalEntity> journalentries = user.getJournalentries();

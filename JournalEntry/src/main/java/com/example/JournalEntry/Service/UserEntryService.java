@@ -33,6 +33,10 @@ public class UserEntryService {
         return Userrepo.save(Newuser);
     }
 
+    public void updateUser(User user) {
+        Userrepo.save(user); // no encoding here
+    }
+
     public boolean DeleteUser( ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String name = authentication.getName();
