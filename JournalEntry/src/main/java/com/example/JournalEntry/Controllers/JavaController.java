@@ -52,22 +52,25 @@
 
 
 
-            @DeleteMapping("id/{Username}/{myId}")
-        public ResponseEntity<?> DeleteJournalEntry(@PathVariable String Username, @PathVariable ObjectId myId) {
-                journalEntryService.DeleteEntry(myId, Username);
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            @DeleteMapping("id/{myId}")
+        public ResponseEntity<?> DeleteJournalEntry(@PathVariable ObjectId myId) {
+            journalEntryService.DeleteEntrybyID(myId);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
             }
 
 
-          // @PutMapping("/id/{userName}/{Id}")
-      //public JournalEntity UpdateEntry(@PathVariable String userName, @PathVariable ObjectId Id, @RequestBody JournalEntity newEntry) {
-       // JournalEntity old = journalEntryService.GetByID(Id).orElse(null);
-        //if (old != null) {
-          //   old.setTitle(newEntry.getTitle() != null && !newEntry.getTitle().equals("") ? newEntry.getTitle() : old.getTitle());
-            //old.setContent(newEntry.getContent() != null && !newEntry.getContent().equals("") ? newEntry.getContent() : old.getContent());
-         //}
-        //journalEntryService.SaveEntry(old);
-          //return old;
-       //}
+         @GetMapping("/id/{Id}")
+        public ResponseEntity<List<JournalEntity>> GetJournalByID (@PathVariable ObjectId    Id) {
+             List<JournalEntity> journalEntities = journalEntryService.GetJournalbyID(Id);
+             if (!journalEntities.isEmpty()) {
+                 return new ResponseEntity<>(journalEntities, HttpStatus.FOUND);
+             }
+             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+             }
 
+        @PutMapping("/id/{Id}")
+        public ResponseEntity<JournalEntity> UpdateJournalByID (@PathVariable ObjectId Id, @RequestBody JournalEntity NewJournal) {
+            JournalEntity journal = journalEntryService.UpdateJournalByID(Id, NewJournal);
+            return new ResponseEntity<>(journal, HttpStatus.CREATED);
+        }
     }

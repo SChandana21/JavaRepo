@@ -10,10 +10,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component public class JournalEntryService  {
     @Autowired
@@ -68,5 +71,74 @@ import java.util.Optional;
         JournalEntryrepo.deleteById(id);
     }
 
+    public List<JournalEntity> GetJournalbyID (ObjectId Id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+        User user = UserService.GetUserbyusername(name);
+        List<JournalEntity> collect = user.getJournalentries().stream().filter(x -> x.getID().equals(Id)).collect(Collectors.toList());
+            return collect;
+
+
+    }
+
+
+    public void DeleteEntrybyID (ObjectId Id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+        User user = UserService.GetUserbyusername(name);
+            JournalEntity journal = JournalEntryrepo.findById(Id).orElse(null);
+            if (journal != null) {
+                user.getJournalentries().stream().anyMatch(e -> e.getID().equals(Id)); {
+                    JournalEntryrepo.deleteById(Id);
+                }
+            user.getJournalentries().removeIf(entry -> entry.getID().equals(Id));
+            UserService.updateUser(user);
+        }
+
+
 
 }
+
+            public JournalEntity UpdateJournalByID (ObjectId Id, JournalEntity newEntry) {
+                    Authentication authentication =
+                            SecurityContextHolder.getContext().getAuthentication();
+
+                    String username = authentication.getName();
+                    User user = UserService.GetUserbyusername(username);
+
+                    if (user == null) {
+                        return null;
+                    }
+
+                    boolean ownsJournal = user.getJournalentries()
+                            .stream()
+                            .anyMatch(j -> j.getID().equals(Id));
+
+                    if (!ownsJournal) {
+                        return null; // 401
+                    }
+
+                    Optional<JournalEntity> optionalJournal =
+                            JournalEntryrepo.findById(Id);
+
+                    if (optionalJournal.isEmpty()) {
+                        return null;
+                    }
+
+                    JournalEntity journal = optionalJournal.get();
+
+                    if (newEntry.getContent() != null &&
+                            !newEntry.getContent().isBlank()) {
+
+                        journal.setContent(newEntry.getContent());
+                    }
+
+                    if (newEntry.getTitle() != null &&
+                            !newEntry.getTitle().isBlank()) {
+
+                        journal.setTitle(newEntry.getTitle());
+                    }
+
+                    return JournalEntryrepo.save(journal);
+                }
+    }

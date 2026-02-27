@@ -37,7 +37,7 @@ public class UserEntryService {
         Userrepo.save(user); // no encoding here
     }
 
-    public boolean DeleteUser( ) {
+    public boolean DeleteUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String name = authentication.getName();
         User user = Userrepo.findByUsername(name);
