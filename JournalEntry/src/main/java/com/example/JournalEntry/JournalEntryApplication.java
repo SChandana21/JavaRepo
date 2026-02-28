@@ -27,7 +27,7 @@ public class JournalEntryApplication {
     @Bean
     public CommandLineRunner debugMongo(MongoTemplate mongoTemplate) {
         return args -> {
-            System.out.println("----- MONGO DEBUG -----");
+            System.out.println("- MONGO DEBUG -");
             System.out.println("Database Name: " + mongoTemplate.getDb().getName());
             System.out.println("Factory Class: " + mongoTemplate.getMongoDatabaseFactory().getClass());
             System.out.println("-----------------------");

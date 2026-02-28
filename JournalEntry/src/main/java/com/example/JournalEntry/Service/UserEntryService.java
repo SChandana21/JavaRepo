@@ -33,6 +33,12 @@ public class UserEntryService {
         return Userrepo.save(Newuser);
     }
 
+    public User SaveAdmin( User Newuser) {
+        Newuser.setPassword(passwordEncoder.encode(Newuser.getPassword()));
+        Newuser.setRoles(Arrays.asList("USER", "ADMIN"));
+        return Userrepo.save(Newuser);
+    }
+
     public void updateUser(User user) {
         Userrepo.save(user); // no encoding here
     }
