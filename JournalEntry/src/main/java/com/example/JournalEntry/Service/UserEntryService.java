@@ -33,6 +33,18 @@ public class UserEntryService {
         return Userrepo.save(Newuser);
     }
 
+    public boolean BooleanSaveuser(User Newuser) {
+        try {
+            Newuser.setPassword(passwordEncoder.encode(Newuser.getPassword()));
+            Newuser.setRoles(Arrays.asList("USER"));
+            Userrepo.save(Newuser);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
     public User SaveAdmin( User Newuser) {
         Newuser.setPassword(passwordEncoder.encode(Newuser.getPassword()));
         Newuser.setRoles(Arrays.asList("USER", "ADMIN"));
