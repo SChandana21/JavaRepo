@@ -2,6 +2,7 @@ package com.example.JournalEntry.Service;
 
 import com.example.JournalEntry.Entity.User;
 import com.example.JournalEntry.Repository.UserRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 
 @Component
+@Slf4j
 public class UserEntryService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -28,9 +30,15 @@ public class UserEntryService {
     //
 
     public User SaveUser( User Newuser) {
-        Newuser.setPassword(passwordEncoder.encode(Newuser.getPassword()));
-        Newuser.setRoles(Arrays.asList("USER"));
-        return Userrepo.save(Newuser);
+        try {
+            Newuser.setPassword(passwordEncoder.encode(Newuser.getPassword()));
+            Newuser.setRoles(Arrays.asList("USER"));
+            log.error("Error");
+            return Userrepo.save(Newuser);
+        } catch (Exception e) {
+            log.error("Failed because {}", Newuser.getUsername(), e);
+        }
+        return null;
     }
 
     public boolean BooleanSaveuser(User Newuser) {

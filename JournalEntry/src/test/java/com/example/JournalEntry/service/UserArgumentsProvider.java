@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.JournalEntry.service;
 
 import com.example.JournalEntry.Entity.User;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -12,8 +12,7 @@ public class UserArgumentsProvider implements ArgumentsProvider {
     @Override
     public Stream<? extends Arguments> provideArguments(ParameterDeclarations parameters, ExtensionContext context) throws Exception {
         return Stream.of(
-                Arguments.of(User.builder().username("wdawdawd").password("shyam").build()),
-                Arguments.of(User.builder().username("wdawdwdadwas").password("ram").build())
+                Arguments.of(User.builder().username("xoxo").password("ram").build())
         );
     }
 }
