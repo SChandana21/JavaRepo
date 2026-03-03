@@ -3,6 +3,7 @@ package com.example.JournalEntry.Controllers;
 import com.example.JournalEntry.Entity.User;
 import com.example.JournalEntry.Repository.UserRepo;
 import com.example.JournalEntry.Service.UserEntryService;
+import com.example.JournalEntry.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private Cache cache;
     @Autowired
     private UserEntryService userEntryService;
     @GetMapping
@@ -33,4 +36,12 @@ public class AdminController {
     public void CreateNewAdmin(@RequestBody User NewAdmin) {
         userEntryService.SaveAdmin(NewAdmin);
         }
+
+
+    @GetMapping("/clear-cache")
+    public void ClearCache() {
+        cache.Initialize();
+    }
 }
+
+

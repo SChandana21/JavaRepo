@@ -3,3 +3,12 @@ logging:
         com:
           example:
             JournalEntry: OFF
+
+food:
+  api:
+    base-url: "https://www.themealdb.com/api/json/v1/1/search.php?s=FOOD_iTEM"
+
+
+
+
+

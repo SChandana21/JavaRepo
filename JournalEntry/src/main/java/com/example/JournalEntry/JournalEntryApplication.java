@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -32,6 +33,10 @@ public class JournalEntryApplication {
             System.out.println("Factory Class: " + mongoTemplate.getMongoDatabaseFactory().getClass());
             System.out.println("-----------------------");
         };
+    }
+    @Bean
+    public RestTemplate restTemplate () {
+        return new RestTemplate();
     }
 
     @Value("${spring.mongodb.uri:NOT_FOUND}")
