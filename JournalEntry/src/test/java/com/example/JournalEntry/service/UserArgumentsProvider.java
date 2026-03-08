@@ -9,10 +9,10 @@ import org.junit.jupiter.params.support.ParameterDeclarations;
 import java.util.stream.Stream;
 
 public class UserArgumentsProvider implements ArgumentsProvider {
-    @Override
-    public Stream<? extends Arguments> provideArguments(ParameterDeclarations parameters, ExtensionContext context) throws Exception {
-        return Stream.of(
-                Arguments.of(User.builder().username("xoxo").password("ram").build())
-        );
-    }
+   // @Override
+    //public Stream<? extends Arguments> provideArguments(ParameterDeclarations parameters, ExtensionContext context) throws Exception {
+       // return Stream.of(
+         //       Arguments.of(User.builder().username("xoxo").password("ram").build())
+        //);
+    //}
 }

@@ -1,0 +1,2 @@
+19:15:58:679 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.example.JournalEntry.Repository.UserDetailsTests]: UserDetailsTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:15:58:789 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.example.JournalEntry.JournalEntryApplication for test class com.example.JournalEntry.Repository.UserDetailsTests
