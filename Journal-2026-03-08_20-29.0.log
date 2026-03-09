@@ -1,0 +1,10 @@
+20:29:16:859 [http-nio-8081-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing POST /journal
+20:29:16:957 [http-nio-8081-exec-5] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+20:29:16:957 [http-nio-8081-exec-5] DEBUG o.s.s.w.a.w.BasicAuthenticationFilter - Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=Yamal, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER, FactorGrantedAuthority [authority=FACTOR_PASSWORD, issuedAt=2026-03-08T14:59:16.957934100Z]]]
+20:29:16:958 [http-nio-8081-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured POST /journal
+20:29:50:819 [http-nio-8081-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing POST /journal
+20:29:50:918 [http-nio-8081-exec-6] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+20:29:50:918 [http-nio-8081-exec-6] DEBUG o.s.s.w.a.w.BasicAuthenticationFilter - Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=Yamal, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER, FactorGrantedAuthority [authority=FACTOR_PASSWORD, issuedAt=2026-03-08T14:59:50.918249900Z]]]
+20:29:50:918 [http-nio-8081-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured POST /journal
+20:29:54:913 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+20:29:54:916 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete

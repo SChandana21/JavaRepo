@@ -23,14 +23,25 @@ public class FoodService {
     private Cache cache;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private RedisService redisService;
 
     public Meal DisplayFooddetails(String Fooditem) {
-    String FinalAPI = cache.Appcache.get("Food_API").replace("<food_item>", Fooditem);
-         ResponseEntity<Food> exchange = restTemplate.exchange(FinalAPI, HttpMethod.GET, null, Food.class);
-        Food body = exchange.getBody();
-         return body != null && body.meals != null && !body.meals.isEmpty()
-                ? body.meals.get(0)
-                : null;
+        Food food = redisService.get(Fooditem, Food.class);
+        if (food != null && food.meals != null && !food.meals.isEmpty()) {
+            return food.meals.get(0);
+        } else {
+            String FinalAPI = cache.Appcache.get("Food_API").replace("<food_item>", Fooditem);
+            ResponseEntity<Food> exchange = restTemplate.exchange(FinalAPI, HttpMethod.GET, null, Food.class);
+            Food body = exchange.getBody();
+            if (body != null && body.meals != null && !body.meals.isEmpty()) {
+                redisService.set("item", body.meals.get(0), 300l);
+                return body.meals.get(0);
+            } else {
+                return null;
+            }
 
+
+        }
     }
 }

@@ -1,0 +1,4 @@
+20:28:42:514 [http-nio-8081-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing POST /journal
+20:28:42:614 [http-nio-8081-exec-4] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+20:28:42:614 [http-nio-8081-exec-4] DEBUG o.s.s.w.a.w.BasicAuthenticationFilter - Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=Yamal, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER, FactorGrantedAuthority [authority=FACTOR_PASSWORD, issuedAt=2026-03-08T14:58:42.614450600Z]]]
+20:28:42:615 [http-nio-8081-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured POST /journal

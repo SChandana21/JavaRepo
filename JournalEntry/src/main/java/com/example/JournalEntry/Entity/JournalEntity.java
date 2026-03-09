@@ -1,5 +1,6 @@
 package com.example.JournalEntry.Entity;
 
+import com.example.JournalEntry.Enum.Sentiment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -21,6 +22,7 @@ public class JournalEntity {
     private String title;
     private String Content;
     private LocalDateTime date;
+    private Sentiment sentiment;
 
 
 }

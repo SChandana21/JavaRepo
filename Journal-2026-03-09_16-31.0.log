@@ -1,0 +1,6 @@
+16:31:03:064 [http-nio-8081-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /Getfood
+16:31:03:255 [http-nio-8081-exec-3] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+16:31:03:256 [http-nio-8081-exec-3] DEBUG o.s.s.w.a.w.BasicAuthenticationFilter - Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=Yamal, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=000FA9DAD500ED8674A14C2F15C57F17], Granted Authorities=[ROLE_USER, FactorGrantedAuthority [authority=FACTOR_PASSWORD, issuedAt=2026-03-09T11:01:03.255299800Z]]]
+16:31:03:256 [http-nio-8081-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /Getfood
+16:31:54:611 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+16:31:54:613 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
